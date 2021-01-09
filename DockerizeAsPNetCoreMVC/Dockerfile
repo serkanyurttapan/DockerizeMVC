@@ -4,9 +4,9 @@ FROM mcr.microsoft.com/dotnet/sdk:3.1 as build
 WORKDIR /app
 COPY *.csproj .
 RUN dotnet restore
-#bu katmaný ekleme sebebi daha önceden oluþturulan dosyalarý cache den okuyacaktýr.(controller veya class) .cs oluþturursam veya deðiþtirirsem burasý tekrardan bütün dosyalarý oluþturmak yerine deðiþikleri görür ve sadece deðiþiklik olan yerde publish dosyasý oluþturur.
+#bu katmani ekleme sebebi daha onceden olusturulan dosyalari cache den okuyacaktir.(controller veya class) .cs olusturursam veya degistirirsem burasi tekrardan butun dosyalari olusturmak yerine degisikleri gorur ve sadece degisiklik olan yerde publish dosyasi olusturur.
   
-  #örneðin style uzantýlý dosyalarýmda oluþturduðum veya deðiþtirdiðim bir durumda csproj içerisinden farklý olanlarý olacak ve bana o puslish dosyasýný verecek
+  #ornegin style uzantili dosyalarimda olusturdugum veya degistirdigim bir durumda csproj icerisinden farkli olanlari olacak ve bana o puslish dosyasini verecek
 
   #bu duruma multistage denir.
 
@@ -20,8 +20,8 @@ COPY --from=build /app/out .
 ENV ASPNETCORE_URLS ="http://*:4500"
 ENTRYPOINT ["dotnet", "DockerizeAsPNetCoreMVC.dll"]
 
-#docker run -p 5000:80 --name container(containername) 54d(imagenameId) ile console dan farklý olarak port numarasý atamam lazým.. 5000 iþletim sisteminin portu, 80 portu ise uygulamanýn ayaða kalkacaðý porttur.
-#image lerin boyutlarýný küçültmek için yapacaðým þey multistage yöntemidir.
+#docker run -p 5000:80 --name container(containername) 54d(imagenameId) ile console dan farkli olarak port numarasi atamam lazim.. 5000 isletim sisteminin portu, 80 portu ise uygulamanin ayaga kalkacagi porttur.
+#image lerin boyutlarini kucultmek icin yapacagim sey multistage yontemidir.
 
 #sdk 
   #app
